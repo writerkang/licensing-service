@@ -1,12 +1,12 @@
-management:
-  health:
-    diskspace:
-      enabled: true
-    db:
-      enabled: false
-  endpoints:
-    web:
-      base-path: /
-    health:
-      enabled: true
-      show-details: always
+#management:
+#  health:
+#    diskspace:
+#      enabled: true
+#    db:
+#      enabled: false
+#  endpoints:
+#    web:
+#      base-path: /
+#    health:
+#      enabled: true
+#      show-details: always
