@@ -1,13 +1,13 @@
 package com.optimagrowth.license.service;
 
 import com.optimagrowth.license.model.License;
+import com.optimagrowth.license.repository.LicenseRepository;
 import java.util.Locale;
-import java.util.Random;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 @Service
 public class LicenseService {
@@ -15,16 +15,14 @@ public class LicenseService {
     @Autowired
     MessageSource messages;
 
-    public License getLicense(String licenseId, String organizationId) {
-        License license = new License();
-        license.setId(new Random().nextInt(1000));
-        license.setLicenseId(licenseId);
-        license.setOrganizationId(organizationId);
-        license.setDescription("Software product");
-        license.setProductName("Ostock");
-        license.setLicenseType("full");
+    @Autowired
+    private LicenseRepository licenseRepository;
 
-        return license;
+    public License getLicense(String licenseId, String organizationId) {
+        License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
+        Objects.requireNonNull(license);
+
+        return license.withComment("H2 database");
     }
 
     public String createLicense(License license, String organizationId, Locale locale) {
