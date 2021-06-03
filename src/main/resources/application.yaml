@@ -8,15 +8,19 @@ spring:
 
 management:
   health:
+    defaults:
+      enabled: false
     diskspace:
       enabled: true
     db:
       enabled: false
   endpoints:
     web:
-      base-path: /
       exposure:
         include: "*"
     health:
       enabled: true
       show-details: always
+
+server:
+  port: 8080
