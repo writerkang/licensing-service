@@ -1,6 +1,6 @@
 spring:
   config:
-    import: optional:configserver:http://localhost:8071
+    import: optional:configserver:http://172.23.0.52:58071
   application:
     name: licensing-service
   profiles:
