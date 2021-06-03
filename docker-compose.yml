@@ -2,15 +2,16 @@ version: '3.7'
 
 services:
   licensingservice:
-    image: icensing-service:0.0.1-SNAPSHOT
+    image: licensing-service:0.0.1-SNAPSHOT
     ports:
       - "8080:8080"
     environment:
-      - "SPRING_PROFILES_ACTIVE=dev"
+      SPRING_PROFILES_ACTIVE: "dev"
+      SPRING_CLOUD_CONFIG_URI: http://localhost:8071
     networks:
       backend:
-        - aliases:
-            - "licenseservice"
+        aliases:
+          - "licenseservice"
 
 networks:
   backend:
