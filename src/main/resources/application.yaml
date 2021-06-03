@@ -1,3 +1,11 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:8071
+  application:
+    name: licensing-service
+  profiles:
+    active: dev
+
 management:
   health:
     diskspace:
@@ -7,6 +15,8 @@ management:
   endpoints:
     web:
       base-path: /
+      exposure:
+        include: "*"
     health:
       enabled: true
       show-details: always
