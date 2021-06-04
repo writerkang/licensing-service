@@ -54,4 +54,12 @@ public class LicenseService {
 
         return responseMessage;
     }
+
+    public License getLicense(String licenseId, String organiztionId, String clientType) {
+        License license = licenseRepository.findByOrganizationIdAndLicenseId(organiztionId, licenseId);
+
+        Objects.requireNonNull(license);
+
+        return license.withComment("organization");
+    }
 }
