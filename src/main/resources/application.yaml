@@ -24,3 +24,52 @@ management:
 
 server:
   port: 8080
+
+logging:
+  level:
+    org.springframework.web: warn
+    com.optimagrowth: debug
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      licenseService:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        waitDurationInOpenState: 3s
+        failureRateThreshold: 50
+  bulkhead:
+    instances:
+      bulkheadLicenseService:
+        maxWaitDuration: 10ms
+        maxConcurrentCalls: 20
+  thread-pool-bulkhead:
+    instances:
+      bulkheadLicenseService:
+        maxThreadPoolSize: 1
+        coreThreadPoolSize: 1
+        queueCapacity: 1
+        keepAliveDuration: 20ms
+  ratelimiter:
+    instances:
+      licenseService:
+        timeoutDuration: 1000ms
+        limitRefreshPeriod: 5000
+        limitForPeriod: 5
+  retry:
+    instances:
+      retryLicenseService:
+        maxRetryAttempts: 5
+        waitDuration: 10000
+        retry-exceptions:
+          - java.util.concurrent.TimeoutException
+
+keycloak:
+  realm: spmia-realm
+  auth-server-url: http://localhost:30081/auth
+  ssl-required: external
+  resource: ostock
+  credentials:
+    secret: 8267db04-65ca-4337-a852-625eb2b020d3
+  use-resource-role-mappings: true
+  bearer-only: true

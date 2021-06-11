@@ -16,3 +16,16 @@ services:
 networks:
   backend:
     driver: bridge
+
+keycloak:
+  image: jboss/keycloak
+  restart: always
+  environment:
+    KEYCLOAK_USER: admin
+    KEYCLOAK_PASSWORD: admin
+  ports:
+    - "8080:8080"
+  networks:
+    backend:
+      aliases:
+        - "keycloak"
