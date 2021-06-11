@@ -1,3 +1,5 @@
+version: '3.7'
+
 zookeeper:
   image: wurstmeister/zookeeper:latest
   ports:
