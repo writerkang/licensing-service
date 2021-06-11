@@ -31,3 +31,7 @@ redisserver:
     backend:
       aliases:
         - "redis"
+        -
+networks:
+  backend:
+    driver: bridge
